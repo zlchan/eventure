@@ -1,0 +1,185 @@
+/* src/components/EventCard/EventCard.css */
+.event-card {
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    transition: transform 0.2s ease-in-out;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+  }
+
+  .event-card-wrapper {
+    position: relative;
+  }
+  
+  .event-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  }
+  
+  .event-card-image-wrapper {
+    position: relative;
+    width: 100%;
+    padding-top: 56.25%;
+    background-color: #f0f0f0;
+  }
+  
+  .event-card-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+  
+  .event-card-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    padding: 16px;
+    background: linear-gradient(
+      to bottom,
+      rgba(0, 0, 0, 0.4) 0%,
+      rgba(0, 0, 0, 0) 100%
+    );
+  }
+  
+  .event-card-category {
+    display: inline-block;
+    background: rgba(0, 0, 0, 0.75);
+    color: white;
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 500;
+  }
+  
+  .event-card-content {
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    justify-content: space-between;
+  }
+  
+  .event-card-text {
+    margin-bottom: 16px;
+  }
+  
+  .event-card-title {
+    margin: 0 0 8px 0;
+    font-size: 18px;
+    font-weight: 600;
+    color: #333;
+    line-height: 1.4;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+  }
+  
+  .event-card-info,
+  .event-card-info-date {
+    margin: 0 0 4px 0;
+    font-size: 14px;
+    color: #666;
+  }
+  
+  .event-card-info-date {
+    margin-top: 10px;
+    font-weight: 900;
+  }
+
+  .event-card-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 8px;
+    border-top: 1px solid #eee;
+  }
+
+  .event-card-ticket-button {
+    padding: 0.75rem;
+    background-color: var(--secondary-color);
+    color: white;
+    border: none;
+    border-radius: 0.5rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+  }
+  
+  .event-card-ticket-button:hover {
+    background-color: var(--dark-secondary-color);
+  }
+  
+  .event-card-ticket-button:focus {
+    outline: 2px solid var(--dark-secondary-color);
+    outline-offset: 2px;
+  }
+
+  .favourite-button:hover {
+    transform: translateY(-50%) scale(1.1);
+  }
+
+  .favourite-button {
+    position: absolute;
+    right: 16px;
+    top: 47%;
+    transform: translateY(-50%);
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: white;
+    border: none;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+    z-index: 10;
+  }
+
+  .favourite-button .favourite-icon {
+    width: 20px;
+    height: 20px;
+    stroke: #9ca3af;
+    transition: stroke 0.2s ease, fill 0.2s ease;
+  }
+
+  .favourite-button:hover .favourite-icon {
+    stroke: #4b5563;
+  }
+  
+  .favourite-button.is-favourite .favourite-icon {
+    stroke: #fbbf24;
+    fill: #fbbf24;
+  }
+
+  /* Add this to your Home.css */
+  .events-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 24px;
+    padding: 24px;
+  }
+  
+  @media (max-width: 768px) {
+    .events-grid {
+      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+      gap: 16px;
+      padding: 16px;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .events-grid {
+      grid-template-columns: 1fr;
+    }
+  }

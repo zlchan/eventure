@@ -1,0 +1,131 @@
+.side-menu-bar {
+    min-width: 240px;
+    max-width: 240px;
+    width: 240px;
+    background-color: var(--background-color);
+    top: 64px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transition: all var(--transition-duration) var(--transition-timing);
+    padding: 25px 0px;
+    height: 100vh;
+    position: fixed;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+    overflow-x: hidden;
+  }
+
+  .side-menu-bar.collapsed {
+    width: 64px;
+    min-width: 64px;
+    max-width: 64px;
+  }  
+
+  .side-menu-bar a {
+    text-decoration: none;
+    color: inherit;
+    width: 100%;
+  }
+
+  .icon {
+    font-size: 20px;
+    margin-right: 10px;
+    transition: margin var(--transition-duration) var(--transition-timing);
+  }
+
+  .collapsed .icon {
+    margin-right: 0;
+  }  
+
+  .menu-border {
+    width: 100%;
+    padding: 10px 20px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    transition: all var(--transition-duration) var(--transition-timing);
+  }
+
+  .menu-border:hover {
+    background-color: var(--active-color);
+    color: var(--hover-text-color);
+  }
+
+  .collapsed .menu-border {
+    padding: 10px;
+    justify-content: center;
+  }
+
+  .menu-border:active {
+    background-color: var(--secondary-color);
+  }
+
+  .menu-border.active {
+    background-color: var(--secondary-color);
+    color: #fff;
+  }
+  
+  .menu-border.active .icon {
+    color: #fff;
+  }
+  
+
+  .menu-items {
+    list-style: none;
+    padding: 0;
+    text-align: left;
+    width: 90%;
+    flex-grow: 1;
+  }
+  
+  .menu-items li {
+    align-items: left;
+    font-size: 24px;
+    color: var(--text-color);
+    cursor: pointer;
+    margin: 0 2px 10px;
+    transition: all 0.3s ease;
+  }
+
+  .menu-text {
+    font-size: 16px;
+    white-space: nowrap;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+  }
+
+  
+  .collapsed .menu-text {
+    opacity: 0;
+    visibility: hidden;
+    width: 0;
+    margin: 0;
+  }
+
+  .icon {
+    font-size: 28px;
+    margin-right: 10px;
+  }
+
+  @media (max-width: 768px) {
+    .side-menu-bar {
+      width: 60px;
+      min-width: 60px;
+      max-width: 60px;
+    }
+  
+    .menu-text {
+      opacity: 0;
+      visibility: hidden;
+      width: 0;
+      margin: 0;
+    }
+  
+    .menu-border {
+      padding: 10px;
+      justify-content: center;
+    }
+  
+    .icon {
+      margin-right: 0;
+    }
+  }

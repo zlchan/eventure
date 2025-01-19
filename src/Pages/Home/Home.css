@@ -1,0 +1,62 @@
+.home-container {
+    width: 100%;
+    max-width: 1280px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 24px;
+    padding-left: 24px;
+    padding-right: 24px;
+    padding-bottom: 56px;
+}
+
+.welcome-title {
+  font-size: 52px;
+  font-weight: 900;
+  line-height: 60px;
+  margin-bottom: 48px;
+  margin-left: 24px;
+}
+
+.home-title {
+    font-size: 32px;
+    font-weight: 600;
+    font-family:'Trebuchet MS';
+    margin-left: 24px;
+    margin-bottom: 24px;
+}
+
+.events-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 24px;
+  }
+
+.loading, .error {
+  text-align: center;
+  padding: 2rem;
+  font-size: 1.2rem;
+}
+
+.error {
+  color: #ff0000;
+}
+
+  @media (max-width: 768px) {
+    .events-grid {
+      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    }
+    
+    .home-title {
+      font-size: 24px;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .home-container {
+      padding: 16px;
+    }
+    
+    .events-grid {
+      grid-template-columns: 1fr;
+    }
+  }

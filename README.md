@@ -1,0 +1,2 @@
+# eventure
+Event Explorer Platform

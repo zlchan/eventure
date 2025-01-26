@@ -19,7 +19,7 @@ const EventList = ({ events }) => {
                         event.images?.[0]?.url;
 
           return (
-            <div key={event.id} className="event-card">
+            <div key={event.id} className="event-list-card">
               <div className="event-image">
                 <img src={image} alt={event.name} className="h-28 w-48 object-cover"/>
               </div>

@@ -15,7 +15,7 @@ const EventCategoryGrid = () => {
         <div className="categories-container">
             <div className="categories-header">
                 <h2 className="categories-title">Discover Your Favourites</h2>
-                <a href="#" className='view-all'>View all</a>
+                {/* <a href="" className='view-all'>View all</a> */}
             </div>
 
             <div className="categories-grid">

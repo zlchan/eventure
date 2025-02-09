@@ -178,10 +178,18 @@
       gap: 16px;
       padding: 16px;
     }
+
+    .favourite-button {
+      top: 43%;
+    }
   }
   
   @media (max-width: 480px) {
     .events-grid {
       grid-template-columns: 1fr;
+    }
+
+    .favourite-button {
+      top: 43%;
     }
   }

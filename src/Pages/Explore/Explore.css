@@ -196,7 +196,9 @@
     font-size: 1.5rem;
     font-weight: 600;
     color: #111827;
+    padding-bottom: 24px;
     margin-bottom: 24px;
+    border-bottom: 2px black solid;
   }
   
   .loading-state {
@@ -235,6 +237,10 @@
     background-color: #dc2626;
   }
   
+  .events-section {
+    padding: 16px;
+  }
+
   /* Responsive adjustments */
   @media (max-width: 768px) {
     .main-grid {

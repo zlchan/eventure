@@ -3,7 +3,7 @@ import React, { useState, useEffect } from "react";
 import EventCard from "../../components/EventCard/EventCard";
 import EventFilterTab from "../../components/EventFilterTab/EventFilterTab";
 import EventCategoryGrid from "../../components/EventCategoryGrid/EventCategoryGrid";
-import { eventService } from "../../services/api/eventApi"
+import { eventService } from "../../services/api/ticketmasterApi"
 import './Home.css';
 const Home = () => {
   const [selectedCategory, setSelectedCategory] = useState('all');

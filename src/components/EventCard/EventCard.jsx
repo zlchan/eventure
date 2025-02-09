@@ -9,7 +9,6 @@ const EventCard = ({ event }) => {
     name, 
     date, 
     venue, 
-    price, 
     imageUrl, 
     category, 
     onTicketClick 

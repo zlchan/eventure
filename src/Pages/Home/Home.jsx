@@ -90,7 +90,7 @@ const Home = () => {
       <h1 className="home-title">Upcoming Events</h1>
       <EventFilterTab onCategoryChange={ handleCategoryChange }/>
 
-      <div className="events-grid">
+      <div className="home-events-grid">
         {weeklyEvents.map(event => (
           <EventCard  
             key={event.id} 

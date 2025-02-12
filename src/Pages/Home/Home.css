@@ -24,7 +24,7 @@
     margin-bottom: 24px;
 }
 
-.events-grid {
+.home-events-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
     gap: 24px;
@@ -41,7 +41,7 @@
 }
 
   @media (max-width: 768px) {
-    .events-grid {
+    .home-events-grid {
       grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
     }
     
@@ -55,7 +55,7 @@
       padding: 16px;
     }
     
-    .events-grid {
+    .home-events-grid {
       grid-template-columns: 1fr;
     }
   }

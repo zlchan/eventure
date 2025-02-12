@@ -19,7 +19,7 @@ const EventList = ({ events, isLoading }) => {
 
   if (isLoading) {
     return (
-      <div className="events-container">
+      <div className="events-list-container">
         <div className="events-grid">
           {[1, 2, 3, 4, 5, 6].map((index) => (
             <div key={index} className="event-card-skeleton">
@@ -38,7 +38,7 @@ const EventList = ({ events, isLoading }) => {
 
   if (!eventList?.length) {
     return (
-      <div className="events-container">
+      <div className="events-list-container">
         <div className="empty-state">
           No events found for the selected date and category
         </div>
@@ -47,7 +47,7 @@ const EventList = ({ events, isLoading }) => {
   }
 
   return (
-    <div className="events-container">
+    <div className="events-list-container">
         <div className="events-list">
             {eventList.map((event) => {
                 const image = event.images?.find(img => img.ratio === '16_9' && img.url.startsWith('https://images'))?.url || 
@@ -63,7 +63,7 @@ const EventList = ({ events, isLoading }) => {
                         </div>
 
                         <div className="event-content">
-                            <div className="event-header">
+                            <div className="event-list-header">
                                 <h3 className="event-title">{event.name}</h3>
                                 <div className="event-meta">
                                     <div className="meta-item">

@@ -23,7 +23,7 @@ const Header = () => {
             </div>
 
             <div className="right-section">
-                <button className="create-button">
+                <button className="header-create-button">
                     <span>+ </span>
                     Create Event
                 </button>

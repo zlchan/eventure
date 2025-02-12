@@ -1,4 +1,4 @@
-.events-container {
+.events-list-container {
   max-width: 1200px;
   margin: 0 auto;
   padding: 24px;
@@ -65,7 +65,7 @@
   flex-direction: column;
 }
 
-.event-header {
+.event-list-header {
   margin-bottom: 16px;
 }
 

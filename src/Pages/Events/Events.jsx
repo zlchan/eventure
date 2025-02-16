@@ -1,9 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 import './Events.css'
 import { Calendar, Users, BarChart, Plus } from 'lucide-react'
+import CreateEventModal from '../../components/CreateEventModal/CreateEventModal';
 
 const Events = () => {
-
+    const [isCreateModalOpen, setIsCreateModalOpen] = useState(false);
     // sample event data - need replace with database and backend data
     const events = [
         {
@@ -46,11 +47,23 @@ const Events = () => {
         <div className="events-container">
             <div className="events-header">
                 <h1>My Events</h1>
-                <button className="events-create-button">
+                <button className="events-create-button"
+                    onClick={() => setIsCreateModalOpen(true)}>
                     <Plus></Plus>
                     Create Event
                 </button>
             </div>
+
+            <CreateEventModal 
+                isOpen={isCreateModalOpen}
+                onClose={() => setIsCreateModalOpen(false)}
+                onCreateEvent={(eventData) => {
+                    // Handle the event creation here
+                    console.log(eventData);
+                    // You'll want to add this to your events array or send to backend
+
+                }}
+            />
 
             <div className="quick-tools">
                 {quickTools.map((tool, index) => (

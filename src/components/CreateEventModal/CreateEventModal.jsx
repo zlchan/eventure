@@ -3,6 +3,7 @@ import { X, ArrowLeft, ArrowRight } from "lucide-react";
 import * as Dialog from "@radix-ui/react-dialog";
 
 const CreateEventModal = ({ isOpen, onClose, onCreateEvent }) => {
+  const [errors, setErrors] = useState({})
   const [step, setStep] = useState(1);
   const [formData, setFormData] = useState({
     title: "",
@@ -19,6 +20,11 @@ const CreateEventModal = ({ isOpen, onClose, onCreateEvent }) => {
       ...prev,
       [name]: value,
     }));
+
+    setErrors((prev) => ({
+      ...prev,
+      [name]: "",
+    }))
   };
 
   const resetForm = () => {
@@ -31,6 +37,7 @@ const CreateEventModal = ({ isOpen, onClose, onCreateEvent }) => {
       maxAttendees: "",
       description: "",
     });
+    setErrors({});
   };
 
   const handleClose = () => {
@@ -38,20 +45,41 @@ const CreateEventModal = ({ isOpen, onClose, onCreateEvent }) => {
     onClose();
   }
 
-  const handleNext = () => setStep((prev) => prev + 1);
+  const validateStep = () => {
+    const newErrors = {};
+
+    switch (step) {
+      case (1): 
+        if (!formData.title.trim()) newErrors.title = "Title is required";
+        if (!formData.date) newErrors.date = "Date is required";
+        if (!formData.time) newErrors.time = "Time is required";
+        break;
+      case (2): 
+        if (!formData.location.trim()) newErrors.location = "Location is required";
+        if (!formData.maxAttendees || formData.maxAttendees <= 0) newErrors.maxAttendees = "Maximum attendees must be greater than 0";
+        break;
+      case (3): 
+        if (!formData.description.trim()) newErrors.description = "Description is required";
+        break;
+      default:
+        break;
+    }
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
+  }
+
+  const handleNext = () => {
+    if (validateStep()) {
+      setStep((prev) => prev + 1)
+    }
+  };
   const handleBack = () => setStep((prev) => prev - 1);
   const handleSubmit = () => {
-    onCreateEvent(formData);
-    onClose();
-    setStep(1);
-    setFormData({
-      title: "",
-      date: "",
-      time: "",
-      location: "",
-      maxAttendees: "",
-      description: "",
-    });
+    if (validateStep()){
+      onCreateEvent(formData);
+      resetForm();
+      onClose();
+    }
   };
 
   const renderStep = () => {
@@ -68,6 +96,9 @@ const CreateEventModal = ({ isOpen, onClose, onCreateEvent }) => {
                 placeholder="Enter event title"
                 className="w-full p-2 border rounded-md"
               />
+              {errors.title && (
+                <p className="text-red-500 text-sm">{errors.title}</p>
+              )}
             </div>
             <div className="grid grid-cols-2 gap-4">
               <div className="space-y-2">
@@ -80,6 +111,9 @@ const CreateEventModal = ({ isOpen, onClose, onCreateEvent }) => {
                     onChange={handleInputChange}
                     className="pl-8 w-full p-2 border rounded-md"
                   />
+                  {errors.date && (
+                    <p className="text-red-500 text-sm">{errors.date}</p>
+                  )}
                 </div>
               </div>
               <div className="space-y-2">
@@ -92,6 +126,9 @@ const CreateEventModal = ({ isOpen, onClose, onCreateEvent }) => {
                     onChange={handleInputChange}
                     className="pl-8 w-full p-2 border rounded-md"
                   />
+                  {errors.time && (
+                    <p className="text-red-500 text-sm">{errors.time}</p>
+                  )}
                 </div>
               </div>
             </div>
@@ -110,6 +147,9 @@ const CreateEventModal = ({ isOpen, onClose, onCreateEvent }) => {
                   placeholder="Enter event location"
                   className="pl-8 w-full p-2 border rounded-md"
                 />
+                {errors.location && (
+                  <p className="text-red-500 text-sm">{errors.location}</p>
+                )}
               </div>
             </div>
             <div className="space-y-2">
@@ -123,6 +163,9 @@ const CreateEventModal = ({ isOpen, onClose, onCreateEvent }) => {
                   placeholder="Enter max attendees"
                   className="pl-8 w-full p-2 border rounded-md"
                 />
+                {errors.maxAttendees && (
+                  <p className="text-red-500 text-sm">{errors.maxAttendees}</p>
+                )}
               </div>
             </div>
           </div>
@@ -140,6 +183,9 @@ const CreateEventModal = ({ isOpen, onClose, onCreateEvent }) => {
                 rows={4}
                 className="w-full p-2 border rounded-md"
               />
+              {errors.description && (
+                <p className="text-red-500 text-sm">{errors.description}</p>
+              )}
             </div>
             <div className="mt-6 bg-gray-50 p-4 rounded-lg">
               <h4 className="font-medium mb-2">Event Summary</h4>
@@ -175,10 +221,10 @@ const CreateEventModal = ({ isOpen, onClose, onCreateEvent }) => {
         <Dialog.Content className="fixed left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 p-4">
           <div className="bg-white p-6 rounded-lg shadow-lg min-w-[500px] min-h-[400px] max-h-[80vh] w-full max-w-md max-h-[90vh] translate-y-[50px] overflow-y-auto relative">
             <Dialog.Title className="text-lg font-medium flex justify-between sticky top-0 bg-white pb-2 translate-y-[-10px]">
-                Create New Event
-                <button onClick={handleClose} className="rounded-sm hover:bg-gray-200 p-1">
-                  <X className="h-4 w-4" />
-                </button>
+              Create New Event
+              <button onClick={handleClose} className="rounded-sm hover:bg-gray-200 p-1">
+                <X className="h-4 w-4" />
+              </button>
             </Dialog.Title>
             <div className="mt-4">
               <div className="flex justify-between items-center mb-4">

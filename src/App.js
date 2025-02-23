@@ -6,6 +6,7 @@ import Layout from "./common/Layout/Layout"
 import './assets/styles/global.css';
 import './common/SideMenuBar/SideMenuBar';
 
+import Login from './Pages/Auth/Login/Login'
 import Explore from './Pages/Explore/Explore'
 import Event from "./Pages/Events/Events";
 import Favourites from "./Pages/Favourites/Favourites";
@@ -14,6 +15,10 @@ import Help from "./Pages/Help/Help";
 import Account from "./Pages/Account/Account";
 
 const router = createBrowserRouter([
+  {
+    path: "/login",
+    element: <Login />
+  },
   {
     path: "/",
     element: <Layout />,

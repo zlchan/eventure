@@ -1,7 +1,7 @@
 import React, { useState, useEffect} from 'react'
 import { ChevronLeft, ChevronRight} from 'lucide-react';
 import EventList from '../../components/EventList/EventList';
-import { eventService } from '../../services/api/ticketmasterApi';
+import { eventService } from '../../services/api/ticketmasterService';
 import './Explore.css'
 
 const Explore = () => {

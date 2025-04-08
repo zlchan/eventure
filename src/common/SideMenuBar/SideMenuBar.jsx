@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import './SideMenuBar.css';
 import { Link, useLocation } from 'react-router-dom';
-import { BsSearch, BsHouse, BsCalendar2Check, BsStar, BsInfoCircle, BsPerson, BsQuestionCircle } from "react-icons/bs";
+import { BsSearch, BsHouse, BsCalendar2Check, BsStar, BsInfoCircle, BsQuestionCircle } from "react-icons/bs";
 
 const SideMenuBar = () => {
   const [isCollapsed, setIsCollapsed] = useState(false);
@@ -23,7 +23,6 @@ const SideMenuBar = () => {
     { to: '/favorites', icon: <BsStar className='icon'/>, label: 'Favourite' },
     { to: '/about', icon: <BsInfoCircle className='icon'/>, label: 'About' },
     { to: '/help', icon: <BsQuestionCircle className='icon'/>, label: 'Help' },
-    { to: '/account', icon: <BsPerson className='icon'/>, label: 'Account' },
   ];
 
   const isActive = (path) => {

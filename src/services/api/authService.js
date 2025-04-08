@@ -7,6 +7,7 @@ const axiosInstance = axios.create({
     baseURL: API_BASE_URL,
     headers: {
         "Content-Type":  "application/json",
+        "X-Requested-With": "XMLHttpRequest",
     },
 })
 
@@ -49,7 +50,7 @@ export const authService = {
      */
     registerUser: async (registrationData) => {
         try {
-            const response = await axiosInstance.post("/register", registrationData);
+            const response = await axiosInstance.post("/auth/register", registrationData);
             return response.data;
         } catch (error) {
             throw error.response?.data?.error || "Registration failed. Please try again.";

@@ -8,7 +8,7 @@ export const eventService = {
       const params = {
         startDateTime: `${today}T00:00:00Z`,
         endDateTime: `${today}T23:59:59Z`,
-        size: 6,
+        size: 200,
         sort: 'date,asc'
       };
 
@@ -17,7 +17,14 @@ export const eventService = {
           `${BASE_URL}/events.json?apikey=${API_KEY}&${new URLSearchParams(params)}`
         );
         if (!response.ok) throw new Error('Network response was not ok')
-          return await response.json()
+        const data = await response.json();
+        const todayEvents = data._embedded?.events || [];
+    
+        const onSaleTodayEvent = todayEvents
+          .filter(event => event.dates?.status?.code === 'onsale')
+          .sort((a, b) => new Date(a.dates?.start?.dateTime) - new Date(b.dates?.start?.dateTime))
+          .slice(0, 6);
+        return onSaleTodayEvent;
       } catch (e) {
         throw new Error(`Error fetching today's events: ${e.message}`);
       }
@@ -30,7 +37,7 @@ export const eventService = {
       const params = {
         startDateTime: `${startDate}T00:00:00Z`,
         endDateTime: `${endDate}T23:59:59Z`,
-        size: 9,
+        size: 200,
         sort: 'date,asc'
       };
   
@@ -43,7 +50,13 @@ export const eventService = {
           `${BASE_URL}/events.json?apikey=${API_KEY}&${new URLSearchParams(params)}`
         );
         if (!response.ok) throw new Error('Network response was not ok');
-        return await response.json();
+        const data = await response.json();
+        const weeklyEvents = data._embedded?.events || [];
+
+        const onSaleWeeklyEvent = weeklyEvents
+          .filter(event => event.dates?.status?.code === 'onsale')
+          .slice(0, 6);
+        return onSaleWeeklyEvent;
       } catch (e) {
         throw new Error(`Error fetching week's events: ${e.message}`);
       }

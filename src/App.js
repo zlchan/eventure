@@ -1,5 +1,5 @@
 import React from "react";
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import { createBrowserRouter, RouterProvider, Navigate } from "react-router-dom";
 import "./App.css"; 
 import Home from "./Pages/Home/Home";
 import Layout from "./common/Layout/Layout";
@@ -13,9 +13,24 @@ import Favourites from "./Pages/Favourites/Favourites";
 import About from "./Pages/About/About";
 import Help from "./Pages/Help/Help";
 import Account from "./Pages/Account/Account";
+import Settings from "./Pages/Settings/Settings"
 
-// ✅ Import AuthProvider
-import { AuthProvider } from "./contexts/AuthContext"; 
+import { AuthProvider, useAuth } from "./contexts/AuthContext"; 
+
+// Create a wrapper component to handle protected routes
+const ProtectedRoute = ({ children }) => {
+  const { isAuthenticated, isLoading } = useAuth();
+  
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
+  
+  if (!isAuthenticated) {
+    return <Navigate to="/login" replace />;
+  }
+  
+  return children;
+}
 
 const router = createBrowserRouter([
   {
@@ -24,15 +39,25 @@ const router = createBrowserRouter([
   },
   {
     path: "/",
-    element: <Layout />,
+    element: <Navigate to="/home" replace />
+  },
+  {
+    path: "/",
+    element: (
+      <ProtectedRoute>
+        <Layout />
+      </ProtectedRoute>
+    ),     
     children: [
-      { path: "/", element: <Home /> },
+      { index: true, element: <Navigate to="/home" replace /> },
+      { path: "/home", element: <Home /> },
       { path: "/explore", element: <Explore /> },
       { path: "/events", element: <Event /> },
       { path: "/favorites", element: <Favourites /> },
       { path: "/about", element: <About /> },
       { path: "/help", element: <Help /> },
       { path: "/account", element: <Account /> },
+      { path: "/settings", element: <Settings /> },
     ],
   },
 ]);

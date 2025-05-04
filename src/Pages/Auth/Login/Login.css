@@ -96,28 +96,6 @@
     background-color: #3182ce;
 }
 
-.google-login {
-    width: 100%;
-    background-color: white;
-    color: #555;
-    padding: 0.75rem;
-    border: 1px solid #ddd;
-    border-radius: 6px;
-    font-size: 1rem;
-    cursor: pointer;
-    transition: background-color 0.2s, box-shadow 0.2s;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-top: 24px;
-    font-weight: 500;
-}
-
-.google-login:hover {
-    background-color: #f1f1f1;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
-
 .auth-switch {
     text-align: center;
     margin-top: 1rem;

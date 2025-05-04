@@ -1,14 +1,17 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import "./Login.css";
 import { authService } from "../../../services/api/authService";
+import { AuthContext } from "../../../contexts/AuthContext";
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
+    const { login } = useContext(AuthContext);
+    const navigate = useNavigate();
     const [isLogin, setIsLogin] = useState(true);
     const [formData, setFormData] = useState({
         username: "",
         password: "",
         email: "",
-        fullName: ""
     });
     const [error, setError] = useState("");
     const [success, setSuccess] = useState("");
@@ -20,9 +23,10 @@ const Login = () => {
 
         try {
             if (isLogin) {
-                await authService.loginUser(formData.username, formData.password);
+                const response = await authService.loginUser(formData.username, formData.password);
                 setSuccess("Login successful!");
-                window.location.href = "/home"; // Redirect to home page
+                await login(response);
+                navigate("/home");
             } else {
                 await authService.registerUser(formData);
                 setSuccess("Registration successful! Please log in.");
@@ -85,19 +89,6 @@ const Login = () => {
                                     required
                                 />
                             </div>
-
-                            <div className="form-group">
-                                <label htmlFor="fullName">Full Name</label>
-                                <input
-                                    type="text"
-                                    id="fullName"
-                                    name="fullName"
-                                    value={formData.fullName}
-                                    onChange={handleChange}
-                                    placeholder="Enter your full name"
-                                    required
-                                />
-                            </div>
                         </>
                     )}
 
@@ -124,10 +115,6 @@ const Login = () => {
                         {isLogin ? "Login" : "Sign Up"}
                     </button>
                 </form>
-
-                <button className="google-login" onClick={authService.loginWithGoogle}>
-                    Sign in with Google
-                </button>
 
                 <div className="auth-switch">
                     <p>

@@ -1,10 +1,21 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import { useAuth } from './../../contexts/AuthContext';
 import { Search, MapPin, User, Settings, LogOut } from 'lucide-react';
 import './Header.css';
 
 const Header = () => {
+    const { logout } = useAuth();
+    const { user } = useAuth();
     const [showDropdown, setShowDropdown] = useState(false);
+
+    const getAvatarName = (name) => {
+        if (!name) return '';
+        return name.split(' ')
+                .map(word => word[0])
+                .join('')
+                .toUpperCase();
+    }
 
     const toggleDropdown = () => {
         setShowDropdown(!showDropdown);
@@ -51,22 +62,26 @@ const Header = () => {
                 
                 <div className={`user-container ${showDropdown ? 'active' : ''}`}>
                     <div className="user" onClick={toggleDropdown}>
-                        <div className="avatar">AC</div>
-                        <span>Albert Chan</span>
+                        <div className="avatar">{getAvatarName(user.username)}</div>
+                        <span>{user.username}</span>
                     </div>
                     
                     {showDropdown && (
                         <div className="user-dropdown">
                             <ul>
                                 <li>
-                                    <User size={16} />
-                                    <span>Account</span>
+                                    <Link to="/account" className='dropdown-link'>
+                                        <User size={16} />
+                                        <span>Account</span>
+                                    </Link>
                                 </li>
                                 <li>
-                                    <Settings size={16} />
-                                    <span>Settings</span>
+                                    <Link to="/settings" className='dropdown-link'>
+                                        <Settings size={16} />
+                                        <span>Settings</span>
+                                    </Link>
                                 </li>
-                                <li className="logout">
+                                <li className="logout" onClick={logout()}>
                                     <LogOut size={16} />
                                     <span>Logout</span>
                                 </li>

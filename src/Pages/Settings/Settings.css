@@ -1,0 +1,335 @@
+/* SettingsPage.css */
+
+.settings-container {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 30px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: #333;
+  }
+  
+  .settings-header {
+    margin-bottom: 30px;
+  }
+  
+  .settings-header h1 {
+    font-size: 28px;
+    font-weight: 600;
+    margin: 0 0 8px 0;
+  }
+  
+  .settings-header p {
+    color: #6b7280;
+    margin: 0;
+  }
+  
+  /* Content area with navigation and settings panel */
+  .settings-content {
+    display: flex;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+  }
+  
+  /* Left side navigation */
+  .settings-nav {
+    width: 220px;
+    background-color: #f9fafb;
+    padding: 20px 0;
+    border-right: 1px solid #eaedf0;
+  }
+  
+  .settings-nav button {
+    display: block;
+    width: 100%;
+    padding: 12px 25px;
+    text-align: left;
+    background: none;
+    border: none;
+    font-size: 15px;
+    color: #4b5563;
+    cursor: pointer;
+    transition: all 0.2s;
+    position: relative;
+  }
+  
+  .settings-nav button:hover {
+    background-color: #f3f4f6;
+    color: #3b82f6;
+  }
+  
+  .settings-nav button.active {
+    color: #3b82f6;
+    font-weight: 500;
+    background-color: #eff6ff;
+    border-left: 3px solid #3b82f6;
+  }
+  
+  /* Right side settings panel */
+  .settings-panel {
+    flex-grow: 1;
+    padding: 30px;
+  }
+  
+  .settings-section h2 {
+    font-size: 22px;
+    font-weight: 600;
+    margin: 0 0 5px 0;
+  }
+  
+  .section-desc {
+    color: #6b7280;
+    margin: 0 0 25px 0;
+    font-size: 15px;
+  }
+  
+  /* Individual setting items */
+  .setting-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 0;
+    border-bottom: 1px solid #eaedf0;
+  }
+  
+  .setting-item:last-child {
+    border-bottom: none;
+  }
+  
+  .setting-info {
+    flex: 1;
+  }
+  
+  .setting-info h3 {
+    font-size: 16px;
+    font-weight: 500;
+    margin: 0 0 5px 0;
+  }
+  
+  .setting-info p {
+    color: #6b7280;
+    margin: 0;
+    font-size: 14px;
+  }
+  
+  /* Toggle switch */
+  .toggle-switch {
+    position: relative;
+    display: inline-block;
+    width: 52px;
+    height: 26px;
+  }
+  
+  .toggle-switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+  }
+  
+  .toggle-slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #e5e7eb;
+    transition: .4s;
+    border-radius: 34px;
+  }
+  
+  .toggle-slider:before {
+    position: absolute;
+    content: "";
+    height: 18px;
+    width: 18px;
+    left: 4px;
+    bottom: 4px;
+    background-color: white;
+    transition: .4s;
+    border-radius: 50%;
+  }
+  
+  input:checked + .toggle-slider {
+    background-color: #3b82f6;
+  }
+  
+  input:checked + .toggle-slider:before {
+    transform: translateX(26px);
+  }
+  
+  /* Dropdown select */
+  .select-input {
+    padding: 8px 12px;
+    border: 1px solid #e5e7eb;
+    border-radius: 6px;
+    width: 200px;
+    font-size: 14px;
+    color: #333;
+    background-color: #fff;
+  }
+  
+  /* Theme options styling */
+  .theme-selector {
+    display: flex;
+    gap: 20px;
+  }
+  
+  .theme-option {
+    position: relative;
+    display: flex;
+    align-items: center;
+    padding: 10px 15px;
+    background-color: #f9fafb;
+    border: 1px solid #e5e7eb;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  
+  .theme-option.selected {
+    background-color: #eff6ff;
+    border-color: #3b82f6;
+  }
+  
+  .theme-option input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+  }
+  
+  .theme-check {
+    height: 18px;
+    width: 18px;
+    background-color: #fff;
+    border: 1px solid #d1d5db;
+    border-radius: 50%;
+    margin-right: 8px;
+    position: relative;
+  }
+  
+  .theme-option.selected .theme-check:after {
+    content: "";
+    position: absolute;
+    display: block;
+    top: 4px;
+    left: 4px;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #3b82f6;
+  }
+  
+  /* Save button area */
+  .settings-actions {
+    margin-top: 40px;
+    padding-top: 20px;
+    border-top: 1px solid #eaedf0;
+    text-align: right;
+  }
+  
+  .save-btn {
+    background-color: #3b82f6;
+    color: white;
+    border: none;
+    padding: 10px 24px;
+    border-radius: 6px;
+    font-weight: 500;
+    font-size: 15px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+  }
+  
+  .save-btn:hover {
+    background-color: #2563eb;
+  }
+  
+  .secondary-btn {
+    background-color: #fff;
+    color: #3b82f6;
+    border: 1px solid #3b82f6;
+    padding: 8px 16px;
+    border-radius: 6px;
+    font-weight: 500;
+    font-size: 14px;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  
+  .secondary-btn:hover {
+    background-color: #eff6ff;
+  }
+  
+  .connect-more {
+    margin-top: 20px;
+  }
+  
+  /* Responsive styles */
+  @media (max-width: 768px) {
+    .settings-content {
+      flex-direction: column;
+    }
+  
+    .settings-nav {
+      width: 100%;
+      border-right: none;
+      border-bottom: 1px solid #eaedf0;
+      padding: 0;
+      display: flex;
+      overflow-x: auto;
+    }
+  
+    .settings-nav button {
+      padding: 15px 20px;
+      white-space: nowrap;
+      border-left: none;
+      border-bottom: 3px solid transparent;
+    }
+  
+    .settings-nav button.active {
+      border-left: none;
+      border-bottom: 3px solid #3b82f6;
+    }
+  
+    .setting-item {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+  
+    .setting-info {
+      margin-bottom: 15px;
+      width: 100%;
+    }
+  
+    .theme-selector {
+      width: 100%;
+    }
+  
+    .select-input {
+      width: 100%;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .settings-container {
+      padding: 20px 15px;
+    }
+  
+    .settings-panel {
+      padding: 20px 15px;
+    }
+  
+    .theme-selector {
+      flex-direction: column;
+      gap: 10px;
+    }
+  
+    .settings-actions {
+      text-align: center;
+    }
+  
+    .save-btn {
+      width: 100%;
+    }
+  }

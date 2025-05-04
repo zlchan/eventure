@@ -4,8 +4,10 @@ import EventCard from "../../components/EventCard/EventCard";
 import EventFilterTab from "../../components/EventFilterTab/EventFilterTab";
 import EventCategoryGrid from "../../components/EventCategoryGrid/EventCategoryGrid";
 import { eventService } from "../../services/api/ticketmasterService"
+import { useAuth } from "./../../contexts/AuthContext"
 import './Home.css';
 const Home = () => {
+  const { user } = useAuth();
   const [selectedCategory, setSelectedCategory] = useState('all');
   const [todayEvents, setTodayEvents] = useState([]);
   const [weeklyEvents, setWeeklyEvents] = useState([]);
@@ -17,11 +19,11 @@ const Home = () => {
   }
 
   const formatEvents = (events) => {
-    if (!events || !events._embedded || !events._embedded.events) {
+    if (!events) {
       return [];
     }
     
-    return events._embedded.events.map(event => ({
+    return events.map(event => ({
       id: event.id,
       name: event.name,
       date: event.dates.start.localDate,
@@ -76,8 +78,8 @@ const Home = () => {
 
   return (
     <div className="home-container">
-      <h1 className="welcome-title">Hey there, Albert Chan</h1>
-      <h1 className="home-title">What’s On Today</h1>
+      <h1 className="welcome-title">Hey there, {user.username}</h1>
+      <h1 className="home-title">Upcoming Events This Week</h1>
       <div className="events-grid">
         {todayEvents.map(event => (
           <EventCard 

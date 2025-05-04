@@ -1,82 +1,103 @@
-import axios from "axios";
+import axiosInstance from '../config/axios.config';
 
-const API_BASE_URL = process.env.REACT_APP_API_BASE_URL || "http://localhost:8080";
-
-// Axios instance with authorization header
-const axiosInstance = axios.create({
-    baseURL: API_BASE_URL,
-    headers: {
-        "Content-Type":  "application/json",
-        "X-Requested-With": "XMLHttpRequest",
-    },
-})
-
-// Attach token to every request if exists
-axiosInstance.interceptors.request.use((config) => {
-    const token = localStorage.getItem("token");
-    if (token) {
-        config.headers.Authorization = `Bearer ${token}`;
-    }
-    return config;
-})
-
-/** 
- * Handles user login
- * @param (string) username
- * @param (string) password
- * @returns (Promise)
+/**
+ * Authentication and user-related API calls
  */
-
 export const authService = {
     /**
      * Login user and store JWT token
-     * @param {string} username 
-     * @param {string} password 
-     * @returns {Promise}
+     * @param {string} username - User's username or email
+     * @param {string} password - User's password
+     * @returns {Promise<Object>} - User data and token
      */
     loginUser: async (username, password) => {
         try {
-            const response = await axiosInstance.post("/login", { username, password });
-            localStorage.setItem("token", response.data.token);
+            const response = await axiosInstance.post("/auth/login", { username, password });
+            if (response.data.token) {
+                localStorage.setItem("token", response.data.token);
+            }
             return response.data;
         } catch (error) {
-            throw error.response?.data?.error || "Login fialed. Please try again.";
+            throw error;
+        }
+    },
+
+    logoutUser: async () => {
+        try {
+            await axiosInstance.post('/auth/logout');
+            // Clear client-side token
+            localStorage.removeItem('token');
+            
+            // Remove from axios headers
+            delete axiosInstance.defaults.headers.common['Authorization'];
+            window.location.href = '/login';
+        } catch (error) {
+            console.error('Logout error:', error);
+            window.location.href = '/login';
         }
     },
     /**
      * Register a new user
-     * @param {Object} registrationData 
-     * @returns {Promise}
+     * @param {Object} registrationData - User registration information
+     * @param {string} registrationData.username - Username
+     * @param {string} registrationData.email - Email
+     * @param {string} registrationData.password - Password
+     * @returns {Promise<Object>} - Response data
      */
     registerUser: async (registrationData) => {
         try {
-            const response = await axiosInstance.post("/auth/register", registrationData);
+            const response = await axiosInstance.post("/auth/signup", registrationData);
             return response.data;
         } catch (error) {
-            throw error.response?.data?.error || "Registration failed. Please try again.";
+            throw error;
         }
     },
 
     /**
-     * Get current user from token
-     * @returns {Promise}
+     * Get current user information from token
+     * @returns {Promise<Object>} - User profile data
      */
     getCurrentUser: async () => {
         try {
-            const response = await axiosInstance.get("/user/me");
+            const response = await axiosInstance.get("/users/me");
             return response.data;
         } catch (error) {
-            throw error.response?.data?.message || "Failed to fetch user";
+            throw error;
         }
     },
+
     /**
-     * Logout and remove JWT token
+     * Verify if user is authenticated
+     * @returns {boolean} - Authentication status
      */
-    logoutUser: () => {
-        localStorage.removeItem("token");
-        window.location.href = "/login";
+    isAuthenticated: () => {
+        return !!localStorage.getItem("token");
     },
-    loginWithGoogle: () => {
-        window.location.href = "/oauth2/authorization/google";
+
+    /**
+     * Logout user and remove JWT token
+     * @param {boolean} redirect - Whether to redirect after logout
+     */
+    logoutUser: (redirect = true) => {
+        localStorage.removeItem("token");
+        if (redirect) {
+            window.location.href = "/login";
+        }
+    },
+
+    /**
+     * Refresh the authentication token
+     * @returns {Promise<Object>} - New token data
+     */
+    refreshToken: async () => {
+        try {
+            const response = await axiosInstance.post("/auth/refresh-token");
+            if (response.data.token) {
+                localStorage.setItem("token", response.data.token);
+            }
+            return response.data;
+        } catch (error) {
+            throw error;
+        }
     }
-}
+};

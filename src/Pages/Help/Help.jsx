@@ -22,23 +22,11 @@ const HelpSection = ({ title, icon: Icon, children }) => {
 };
 
 const Help = () => {
-    const [searchQuery, setSearchQuery] = useState('');
-
     return (
         <div className="help-container">
             <header className="help-header">
                 <h1>Help & Support - Event Explorer Platform</h1>
                 <p>Find answers to common questions and learn how to use our features</p>
-
-                <div className="help-search-container">
-                    <input 
-                        type="text"
-                        placeholder="Search for help..."
-                        value={searchQuery}
-                        onChange={(e) => setSearchQuery(e.target.value)}
-                        className="help-search-input"
-                    />
-                </div>
             </header>
 
             <main className="help-content">

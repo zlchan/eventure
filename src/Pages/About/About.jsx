@@ -1,5 +1,5 @@
 import React from 'react';
-import test2 from "../../assets/images/test2.png"
+import MissionImg from "../../assets/images/mission.png"
 import './About.css';
 
 const About = () => {
@@ -26,7 +26,7 @@ const About = () => {
               <p>Whether you're looking to attend a workshop that expands your skills, a concert that moves your soul, or a community gathering that introduces you to new friends, Event Explorer is your gateway to a world of possibilities.</p>
             </div>
             <div className="mission-image">
-              <img src="/api/placeholder/500/300" alt="People at an event" />
+              <img src={MissionImg} alt="People at an event" />
             </div>
           </div>
         </div>

@@ -19,7 +19,7 @@ const SideMenuBar = () => {
   const menuItems = [
     { to: '/', icon: <BsHouse className='icon' />, label: 'Home' },
     { to: '/explore', icon: <BsSearch className='icon' />, label: 'Explore' },
-    { to: '/events', icon: <BsCalendar2Check className='icon'/>, label: 'Event' },
+    // { to: '/events', icon: <BsCalendar2Check className='icon'/>, label: 'Event' },
     { to: '/favorites', icon: <BsStar className='icon'/>, label: 'Favourite' },
     { to: '/about', icon: <BsInfoCircle className='icon'/>, label: 'About' },
     { to: '/help', icon: <BsQuestionCircle className='icon'/>, label: 'Help' },

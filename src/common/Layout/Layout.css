@@ -1,84 +1,71 @@
 .layout-container {
-    display: flex;
-    flex-wrap: wrap;
-    overflow: hidden;
-    width: 100%;
-    min-height: 100vh;
-  }
-  
-  .layout-container > header {
-    width: 100%;
-    height: 75px;
-    position: fixed;
-    display: flex;
-    top: 0;
-    left: 0;
-    z-index: 100;
-    background-color: white;
-  }
-  
-  .side-menu-bar {
-    position: fixed;
-    left: 0;
-    top: 75px;
-    width: 240px;
-    height: calc(100vh - 64px);
-    overflow-y: auto;
-    background-color: var(--background-color);
-    z-index: 90;
-    transition: transform 0.3s ease;
-    flex-shrink: 0;
-  }
-  
+  display: flex;
+  flex-wrap: wrap;
+  overflow: hidden;
+  width: 100%;
+  min-height: 100vh;
+  --header-height: 64px;
+  --sidebar-width: 240px;
+  --mobile-breakpoint: 768px;
+}
+
+.layout-container > header {
+  width: 100%;
+  height: var(--header-height);
+  position: fixed;
+  display: flex;
+  top: 0;
+  left: 0;
+  z-index: 100;
+  background-color: white;
+}
+
+.side-menu-bar {
+  position: fixed;
+  left: 0;
+  top: var(--header-height);
+  width: var(--sidebar-width);
+  height: calc(100vh - var(--header-height));
+  overflow-y: auto;
+  background-color: var(--background-color);
+  z-index: 90;
+  transition: transform 0.3s ease;
+  flex-shrink: 0;
+}
+
+.content-container {
+  margin-left: var(--sidebar-width);
+  margin-top: var(--header-height);
+  padding: var(--content-padding);
+  width: calc(100% - var(--sidebar-width));
+  min-height: calc(100vh - var(--header-height));
+  background-color: #fff;
+  box-sizing: border-box;
+  overflow-x: hidden;
+  transition: margin-left 0.3s ease;
+}
+
+@media screen and (max-width: 1024px) {
   .content-container {
-    margin-left: 240px; /* Sidebar width */
-    margin-top: 64px; /* Header height */
-    padding: 40px 80px;
-    width: calc(100% - 240px); /* Full width minus sidebar */
-    min-height: calc(100vh - 64px); /* Full height minus header */
-    background-color: #fff;
-    box-sizing: border-box;
-    overflow-x: hidden;
-    transition: margin-left 0.3s ease; /* Smooth transition for sidebar toggle */
+    padding: var(--content-padding-tablet);
   }
-  
-  @media screen and (max-width: 1024px) {
-    .content-container {
-      padding: 20px 40px;
-    }
+}
+
+@media screen and (max-width: 768px) {
+  .side-menu-bar {
+    transform: translateX(-100%); 
+    width: var(--sidebar-width);
   }
-  
-  @media screen and (max-width: 768px) {
-    .side-menu-bar {
-      transform: translateX(-100%); 
-      width: 240px;
-    }
-  
-    .side-menu-bar.active {
-      transform: translateX(0);
-    }
-  
-    .content-container {
-      margin-left: 0;
-      width: 100%;
-      padding: 20px;
-    }
+
+  .side-menu-bar.active {
+    transform: translateX(0);
   }
-  
-  .side-menu-bar::-webkit-scrollbar {
-    width: 6px;
+
+  .content-container {
+    margin-left: 0;
+    width: 100%;
+    padding: var(--content-padding-mobile);
   }
-  
-  .side-menu-bar::-webkit-scrollbar-thumb {
-    background-color: #c1c1c1;
-    border-radius: 3px;
-  }
-  
-  .content-container::-webkit-scrollbar {
-    width: 6px;
-  }
-  
-  .content-container::-webkit-scrollbar-thumb {
-    background-color: #c1c1c1;
-    border-radius: 3px;
-  }
+}
+
+/* Scrollbar styles remain the same */

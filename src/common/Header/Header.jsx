@@ -81,7 +81,7 @@ const Header = () => {
                                         <span>Settings</span>
                                     </Link>
                                 </li>
-                                <li className="logout" onClick={logout()}>
+                                <li className="logout" onClick={() => logout()}> 
                                     <LogOut size={16} />
                                     <span>Logout</span>
                                 </li>
